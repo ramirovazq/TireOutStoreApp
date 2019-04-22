@@ -9,7 +9,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}> Home Llantas {this.props.tokenUser}</Text> 
+        <Text style={styles.titleText}> Home Llantas {this.props.currentUser} || {this.props.tokenUser}</Text> 
       </View>
     );
   }

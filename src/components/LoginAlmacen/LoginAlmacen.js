@@ -17,11 +17,7 @@ export default class LoginAlmacen extends React.Component {
     Alert.alert('Las credenciales', `username: ${this.state.username} + password: ${this.state.password}`);
       Mylogin.simplelogin(this.state.username, this.state.password).then(
         resultado => {
-          console.log('resultado .....');
-          console.log(resultado);
-          console.log('.....');
-          console.log(resultado['token']);
-          console.log(resultado['user_id']);
+          this.props.asignUser(resultado['token'], resultado['user_id']);
         }
       );
   }
@@ -33,7 +29,7 @@ export default class LoginAlmacen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}> Login Llantas</Text>          
+        <Text style={styles.titleText}> Login {this.props.tokenUser} || {this.props.currentUser} </Text>          
           <TextInput
             value={this.state.username}
             keyboardType = 'email-address'
