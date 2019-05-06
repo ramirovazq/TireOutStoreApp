@@ -14,10 +14,9 @@ export default class LoginAlmacen extends React.Component {
   } //constructor
 
   onLogin() {
-    Alert.alert('Las credenciales', `username: ${this.state.username} + password: ${this.state.password}`);
       Mylogin.simplelogin(this.state.username, this.state.password).then(
         resultado => {
-          this.props.asignUser(resultado['token'], resultado['user_id']);
+          this.props.asignUser(resultado['token'], resultado['user_id'], resultado['username']);
         }
       );
   }
