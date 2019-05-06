@@ -1,15 +1,32 @@
 import React from 'react';
 import {Alert, Button, TouchableOpacity, TextInput, StyleSheet, Text, View } from 'react-native';
+import LlantasList from '../LlantasList/LlantasList';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);    
+    this.onLogout = this.onLogout.bind(this);
   } //constructor
+
+  onLogout() {
+            this.props.asignUser(null, null);
+    }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}> Home Llantas {this.props.currentUser} || {this.props.tokenUser}</Text> 
+        <Text style={styles.titleText}> Home Llantas {this.props.currentUsername} || {this.props.tokenUser}</Text> 
+
+          <LlantasList></LlantasList>
+
+          <TouchableOpacity
+          style={styles.button}
+          onPress={this.onLogout}
+          >
+            <Text style={styles.buttonText}> Salir</Text>
+          </TouchableOpacity>
+
+
       </View>
     );
   }
