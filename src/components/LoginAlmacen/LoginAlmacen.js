@@ -28,7 +28,7 @@ export default class LoginAlmacen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.titleText}> Login {this.props.tokenUser} || {this.props.currentUser} </Text>          
+        <Text style={styles.titleText}> Login </Text>
           <TextInput
             value={this.state.username}
             keyboardType = 'email-address'
@@ -62,7 +62,7 @@ export default class LoginAlmacen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'salmon',
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -25,6 +25,6 @@ export default class App extends React.Component {
     	if (!this.state.tokenUser) {
       		return <LoginAlmacen asignUser={this.asignUserCallback}></LoginAlmacen>
 		}
-		return <Home tokenUser={this.state.tokenUser}  currentUser={this.state.currentUser} currentUsername={this.state.currentUsername} asignUser={this.asignUserCallback} />;
+		return <Home asignUser={this.asignUserCallback} tokenUser={this.state.tokenUser}  currentUser={this.state.currentUser} currentUsername={this.state.currentUsername} asignUser={this.asignUserCallback} />;
   }
 }
