@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, ActivityIndicator, StyleSheet, View } from 'react-native';
+import ElementList from '../ElementList/ElementList';
 
 export default class LlantasList extends Component {
 
@@ -21,9 +22,8 @@ export default class LlantasList extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-
-        console.log('todo cool ...... :D');
-        console.log(responseJson);
+        console.log('responseJson...............');
+        // console.log(responseJson);
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -33,7 +33,6 @@ export default class LlantasList extends Component {
 
       })
       .catch((error) =>{
-        console.log(' error didmount .... llantas list ..... :S');
         console.error(error);
       });
   }
@@ -50,19 +49,9 @@ export default class LlantasList extends Component {
     }
     return (
       <View style={styles.container}>
-        <FlatList
-          data={[
-            {key: 'Devin'},
-            {key: 'Jackson'},
-            {key: 'James'},
-            {key: 'Joel'},
-            {key: 'John'},
-            {key: 'Jillian'},
-            {key: 'Jimmy'},
-            {key: 'Julie'},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item.key} ping</Text>}
-        />
+        <ScrollView>
+          <ElementList llantas={this.state.dataSource} />
+        </ScrollView>
       </View>
     );
   }
@@ -79,6 +68,3 @@ const styles = StyleSheet.create({
     height: 44,
   },
 })
-
-// skip this line if using Create React Native App
-// AppRegistry.registerComponent('AwesomeProject', () => FlatListBasics);

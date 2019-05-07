@@ -62,7 +62,7 @@ export default class LoginAlmacen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: 'salmon',
     alignItems: 'center',
     justifyContent: 'center',
   },
