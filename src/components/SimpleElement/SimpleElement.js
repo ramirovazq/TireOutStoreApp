@@ -9,11 +9,9 @@ export default class SimpleElement extends Component {
       <View>
       	<Text>{this.props.llanta.dot} {this.props.llanta.marca.nombre}</Text>
       	<FlatList
-          data={[
-            {key: 'Devin'},
-            {key: 'Julie'},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          data={this.props.llanta.detalle}
+          keyExtractor={(item, index) => item.id+this.props.llanta.id}
+          renderItem={({item}) => <Text style={styles.item}>{item.permisionario} {item.cantidad}</Text>}
         />
       </View>
     );
