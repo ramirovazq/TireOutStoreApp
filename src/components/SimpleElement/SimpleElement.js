@@ -7,11 +7,11 @@ export default class SimpleElement extends Component {
   render() {
     return (
       <View>
-      	<Text>{this.props.llanta.dot} {this.props.llanta.marca.nombre}</Text>
+      	<Text>{this.props.llanta.dot} {this.props.llanta.marca.nombre} {this.props.llanta.medida.nombre} {this.props.llanta.posicion.nombre} {this.props.llanta.status.nombre}</Text>
       	<FlatList
           data={this.props.llanta.detalle}
           keyExtractor={(item, index) => item.id+this.props.llanta.id}
-          renderItem={({item}) => <Text style={styles.item}>{item.permisionario} {item.cantidad}</Text>}
+          renderItem={({item}) => <Text style={styles.item}>{item.bodega} {item.permisionario} [{item.cantidad}]</Text>}
         />
       </View>
     );
