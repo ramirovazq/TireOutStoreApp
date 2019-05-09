@@ -50,7 +50,7 @@ export default class LlantasList extends Component {
     }
     return (
       <View style={styles.container}>
-        <SimpleButtonElement maxNumber={6} minNumber={-3} isRemoval={true} />
+        <SimpleButtonElement maxNumber={5} minNumber={0} isRemoval={false} />
         <ScrollView>
           <ElementList llantas={this.state.dataSource} />
         </ScrollView>
