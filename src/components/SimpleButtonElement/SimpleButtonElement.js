@@ -33,13 +33,18 @@ export default class SimpleButtonElement extends Component {
     const renderAction = this.props.isRemoval;
     const maxnumberProps = this.props.maxNumber;
     const minnumberProps = this.props.minNumber;
+    const varadd = '+';
+    const varless = '-';
     return (
+
           <TouchableOpacity 
             style={this.checkLimits(minnumberProps, maxnumberProps) ? styles.button : styles.buttondis } 
-            onPress={this.addCount} 
+            onPress={renderAction ? this.lessCount : this.addCount} 
             disabled={!this.checkLimits(minnumberProps, maxnumberProps)} 
           >
-          <Text style={styles.buttonText}> + { this.state.count !== 0 ? this.state.count: null } </Text>
+          <Text style={styles.buttonText}> 
+          {renderAction ? varless : varadd } 
+          { this.state.count !== 0 ? this.state.count: null } </Text>
           </TouchableOpacity>
     );
   }

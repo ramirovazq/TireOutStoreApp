@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, ActivityIndicator, StyleSheet, View } from 'react-native';
 import ElementList from '../ElementList/ElementList';
-import SimpleButtonElement from '../SimpleButtonElement/SimpleButtonElement';
 
 export default class LlantasList extends Component {
 
@@ -50,7 +49,6 @@ export default class LlantasList extends Component {
     }
     return (
       <View style={styles.container}>
-        <SimpleButtonElement maxNumber={5} minNumber={0} isRemoval={false} />
         <ScrollView>
           <ElementList llantas={this.state.dataSource} />
         </ScrollView>

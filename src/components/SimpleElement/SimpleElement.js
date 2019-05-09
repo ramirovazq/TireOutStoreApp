@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, Text, View } from 'react-native';
-import SubListElement from '../SubListElement/SubListElement';
+import SimpleButtonElement from '../SimpleButtonElement/SimpleButtonElement';
 
 export default class SimpleElement extends Component {
 
@@ -11,7 +11,12 @@ export default class SimpleElement extends Component {
       	<FlatList
           data={this.props.llanta.detalle}
           keyExtractor={(item, index) => item.id+this.props.llanta.id}
-          renderItem={({item}) => <Text style={styles.item}>{item.bodega} {item.permisionario} [{item.cantidad}]</Text>}
+          renderItem={({item}) => (
+            <View>
+              <Text style={styles.item}>{item.bodega} {item.permisionario} [{item.cantidad}]</Text>
+              <SimpleButtonElement maxNumber={item.cantidad} minNumber={0} isRemoval={false} /> 
+            </View>
+            )}
         />
       </View>
     );
