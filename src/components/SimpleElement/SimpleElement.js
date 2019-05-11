@@ -14,7 +14,14 @@ export default class SimpleElement extends Component {
           renderItem={({item}) => (
             <View>
               <Text style={styles.item}>{item.bodega} {item.permisionario} [{item.cantidad}]</Text>
-              <SimpleButtonElement maxNumber={item.cantidad} minNumber={0} isRemoval={false} /> 
+              <SimpleButtonElement 
+                maxNumber={item.cantidad} 
+                minNumber={0} 
+                isRemoval={false} 
+                idLlanta={this.props.llanta.id}
+                bodega={item.bodega}
+                permisionario={item.permisionario} 
+              /> 
             </View>
             )}
         />

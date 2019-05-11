@@ -13,6 +13,7 @@ export default class LlantasList extends Component {
   }
 
   componentDidMount(){
+    console.log("antes de montar ....");
     return fetch('http://192.168.0.4:8000/api/v0/llanta/', {
       method: 'GET',
       headers: {
@@ -37,6 +38,9 @@ export default class LlantasList extends Component {
       });
   }
 
+  componentWillUnmount(){
+    console.log("DESTRUIDO de montar ....");
+  }
 
   render() {
 
