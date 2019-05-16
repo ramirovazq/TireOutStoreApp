@@ -16,7 +16,17 @@ export default class SimpleButtonElement extends Component {
     this.setState({
       count: this.state.count + 1
     })
+    //console.log('onclick .......');
+    this.props.onAdd({idLlanta : this.props.idLlanta,
+                     bodega: this.props.bodega, 
+                     permisionario: this.props.permisionario, 
+                     cantidad: 1,
+                     dot: this.props.dot,
+                     marca: this.props.marca,
+                     medida: this.props.medida});
+
   }
+
 
   lessCount = () => {
     this.setState({

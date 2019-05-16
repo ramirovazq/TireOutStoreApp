@@ -8,13 +8,13 @@ export default class LlantasList extends Component {
     super(props);
     this.state = { 
       isLoading: true,
-      dataSource: {}
+      dataSource: {},
+      economicSource: {}
     }
   }
 
-  componentDidMount(){
-    console.log("antes de montar ....");
-    return fetch('http://192.168.0.4:8000/api/v0/llanta/', {
+  componentDidMount(){    
+    fetch('http://192.168.0.4:8000/api/v0/llanta/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -36,7 +36,30 @@ export default class LlantasList extends Component {
       .catch((error) =>{
         console.error(error);
       });
-  }
+
+    fetch('http://192.168.0.4:8000/api/v0/economico/', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Authorization': `Token ${this.props.tokenUser}`,
+      }
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // console.log('responseJson...............');
+        // console.log(responseJson);
+        this.setState({
+          economicSource: responseJson,
+        }, function(){
+
+        });
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+
+  } // componentDidMount
 
   componentWillUnmount(){
     console.log("DESTRUIDO de montar ....");
@@ -54,7 +77,7 @@ export default class LlantasList extends Component {
     return (
       <View style={styles.container}>
         <ScrollView>
-          <ElementList llantas={this.state.dataSource} />
+          <ElementList llantas={this.state.dataSource} onAdd={this.props.onAdd} />
         </ScrollView>
       </View>
     );

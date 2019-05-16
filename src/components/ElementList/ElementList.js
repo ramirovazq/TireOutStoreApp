@@ -7,7 +7,7 @@ export default class ElementList extends Component {
   llantalist() {
     return this.props.llantas.map((llanta) => {
       return (
-        <SimpleElement key={llanta.id} llanta={llanta}/>
+        <SimpleElement key={llanta.id} llanta={llanta} onAdd={this.props.onAdd} />
       )
     })
   }
