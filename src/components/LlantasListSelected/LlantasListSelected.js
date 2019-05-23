@@ -1,54 +1,21 @@
 import React, { Component } from 'react';
 import { ScrollView, FlatList, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-// import Select from 'react-native-simple-select'
-//import ElementList from '../ElementList/ElementList';
+import PickerEconomico from '../PickerEconomico/PickerEconomico';
 
 export default class LlantasListSelected extends Component {
 
   constructor(props){
     super(props);
     this.state = { 
-      isLoading: true,
-      dataSource: {}
-    }
+      isLoading: false,
+      economicSource: {}
+    } 
   }
 
   componentDidMount(){
-    console.log("antes de montar ....");
-    this.setState({
-        isLoading: false          
-    });
-    
-    console.log('this props llantasSelected');
-    console.log(this.props.llantasSelected);
-    /*
-    return fetch('http://192.168.0.4:8000/api/v0/llanta/', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Authorization': `Token ${this.props.tokenUser}`,
-      }
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        // console.log('responseJson...............');
-        // console.log(responseJson);
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson,
-        }, function(){
-
-        });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
-    */
-  }
+  } // componentDidMount
 
   componentWillUnmount(){
-    console.log("DESTRUIDO de montar ....");
   }
 
   render() {
@@ -74,20 +41,8 @@ export default class LlantasListSelected extends Component {
             </View>
             )}
         />
-        <Text>Seleccion el número económico</Text>
-        <FlatList
-          data={[
-            {key: 'Devin'},
-            {key: 'Jackson'},
-            {key: 'James'},
-            {key: 'Joel'},
-            {key: 'John'},
-            {key: 'Jillian'},
-            {key: 'Jimmy'},
-            {key: 'Julie'},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-        />
+        <Text>Seleccione el número económico</Text>
+        <PickerEconomico tokenUser={this.props.tokenUser} />
       </View>
     );
   }
