@@ -37,7 +37,7 @@ export default class Home extends React.Component {
       llantas[alreadyExist[1]].cantidad = llantas[alreadyExist[1]].cantidad + 1
     } // else
     this.setState({llantasSelected: llantas});
-    console.log(llantas);
+    // console.log(llantas);
   }
 
   changePageCallBack = (numPag) => {

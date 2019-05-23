@@ -9,8 +9,7 @@ export default class LlantasList extends Component {
     super(props);
     this.state = { 
       isLoading: true,
-      dataSource: {},
-      economicSource: {}
+      dataSource: {}
     }
   }
 
@@ -37,33 +36,9 @@ export default class LlantasList extends Component {
       .catch((error) =>{
         console.error(error);
       });
-
-    fetch(`${loginURI}/api/v0/economico/`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Authorization': `Token ${this.props.tokenUser}`,
-      }
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        // console.log('responseJson...............');
-        // console.log(responseJson);
-        this.setState({
-          economicSource: responseJson,
-        }, function(){
-
-        });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
-
   } // componentDidMount
 
   componentWillUnmount(){
-    console.log("DESTRUIDO de montar ....");
   }
 
   render() {
