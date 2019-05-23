@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, ActivityIndicator, StyleSheet, View } from 'react-native';
 import ElementList from '../ElementList/ElementList';
+import {loginURI} from '../../util/Mylogin';
 
 export default class LlantasList extends Component {
 
@@ -14,7 +15,7 @@ export default class LlantasList extends Component {
   }
 
   componentDidMount(){    
-    fetch('http://192.168.0.4:8000/api/v0/llanta/', {
+    fetch(`${loginURI}/api/v0/llanta/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -37,7 +38,7 @@ export default class LlantasList extends Component {
         console.error(error);
       });
 
-    fetch('http://192.168.0.4:8000/api/v0/economico/', {
+    fetch(`${loginURI}/api/v0/economico/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

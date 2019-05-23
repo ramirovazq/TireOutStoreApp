@@ -1,4 +1,6 @@
-const loginURI = 'http://192.168.0.4:8000';
+export const loginURI = 'http://192.168.0.4:8000';
+//const loginURI = 'http://192.168.20.112:8000';
+
 let accessToken = null;
 
 const Mylogin = {
