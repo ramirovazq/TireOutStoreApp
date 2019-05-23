@@ -42,7 +42,7 @@ export default class LlantasListSelected extends Component {
             )}
         />
         <Text>Seleccione el número económico</Text>
-        <PickerEconomico tokenUser={this.props.tokenUser} />
+        <PickerEconomico tokenUser={this.props.tokenUser} economicoSelected={this.props.economicoSelected}/>
       </View>
     );
   }

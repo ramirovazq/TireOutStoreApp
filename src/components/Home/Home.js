@@ -4,6 +4,7 @@ import LlantasList from '../LlantasList/LlantasList';
 import LlantasListSelected from '../LlantasListSelected/LlantasListSelected';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import PageButton from '../PageButton/PageButton';
+import SendButton from '../SendButton/SendButton';
 
 export default class Home extends React.Component {
 
@@ -11,9 +12,11 @@ export default class Home extends React.Component {
     super(props); 
     this.state = {
       pageStep: 1,
-      llantasSelected: []
+      llantasSelected: [],
+      economicoSelected: {}
     };
     this.addLlanta = this.addLlanta.bind(this);
+    this.sendDataCallBack = this.sendDataCallBack.bind(this);
   } //constructor
 
 
@@ -26,6 +29,10 @@ export default class Home extends React.Component {
         }
     }
     return [false, i];
+  }
+
+  sendDataCallBack() {
+    console.log("se envian todos los datos ....");
   }
 
   addLlanta(llanta) {
@@ -46,6 +53,10 @@ export default class Home extends React.Component {
     })
   }
 
+  economicoSelectedCallBack = (user) => {
+    console.log("... selected from parent ...");
+    console.log(user);
+  }
 
   render() {
     if (this.state.pageStep === 1) {
@@ -61,7 +72,9 @@ export default class Home extends React.Component {
       return (
           <View style={styles.container}>
             <Text style={styles.titleText}> Paso 2 |{this.state.pageStep}|{this.props.currentUsername}</Text>
-              <LlantasListSelected tokenUser={this.props.tokenUser} llantasSelected={this.state.llantasSelected}></LlantasListSelected>
+              <LlantasListSelected tokenUser={this.props.tokenUser} llantasSelected={this.state.llantasSelected} economicoSelected={this.economicoSelectedCallBack}></LlantasListSelected>
+
+              <SendButton sendData={this.sendDataCallBack} />
               <PageButton paginaSig={1} changePageHome={this.changePageCallBack}></PageButton>
               <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
           </View>

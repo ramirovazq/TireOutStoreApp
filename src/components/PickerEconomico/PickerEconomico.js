@@ -42,6 +42,7 @@ export default class PickerEconomico extends Component {
 
   updateUser(user) {
     this.setState({user: user});
+    this.props.economicoSelected(user);
   }
 
    render() {
