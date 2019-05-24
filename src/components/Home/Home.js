@@ -5,6 +5,7 @@ import LlantasListSelected from '../LlantasListSelected/LlantasListSelected';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import PageButton from '../PageButton/PageButton';
 import SendButton from '../SendButton/SendButton';
+import {loginURI} from '../../util/Mylogin';
 
 export default class Home extends React.Component {
 
@@ -32,7 +33,38 @@ export default class Home extends React.Component {
   }
 
   sendDataCallBack() {
-    console.log("se envian todos los datos ....");
+    console.log("se envian todos los datos ....llantasSelected");
+    console.log(this.state.llantasSelected);
+    console.log("se envian todos los datos ....economicoSelected");
+    console.log(this.state.economicoSelected);
+    fetch(`${loginURI}/api/v0/vale/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.tokenUser}`,
+      },
+      body: JSON.stringify({
+        "no_folio": "24",
+        "observaciones_grales": "Desde la app yeah",
+        "fecha_vale": "2019-05-23",
+        "tipo_movimiento": "2",
+        "persona_asociada": "1",
+        "creador_vale": "1"
+      })//stringify
+
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+        console.log("Respuesta del Endpoint .....")
+        console.log('responseJson...............');
+        console.log(responseJson);
+    })
+    .catch((error) =>{
+      console.error("ERROR ....");
+      console.error(error);
+    });
+
+
   }
 
   addLlanta(llanta) {
@@ -56,6 +88,10 @@ export default class Home extends React.Component {
   economicoSelectedCallBack = (user) => {
     console.log("... selected from parent ...");
     console.log(user);
+    this.setState({
+      economicoSelected: user
+    })
+
   }
 
   render() {
