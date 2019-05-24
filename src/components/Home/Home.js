@@ -44,10 +44,10 @@ export default class Home extends React.Component {
         'Authorization': `Token ${this.props.tokenUser}`,
       },
       body: JSON.stringify({
-        "no_folio": "24",
-        "observaciones_grales": "Desde la app yeah",
+        "no_folio": "25",
+        "observaciones_grales": "Desde la app yeah !!!",
         "fecha_vale": "2019-05-23",
-        "tipo_movimiento": "2",
+        "tipo_movimiento": "2",//movimiento salida
         "persona_asociada": "1",
         "creador_vale": "1"
       })//stringify

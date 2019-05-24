@@ -58,7 +58,7 @@ export default class PickerEconomico extends Component {
          <View>
             <Picker selectedValue = {this.state.user} onValueChange = {this.updateUser}>
                {this.state.economicSource.map((item, key)=>(
-                  <Picker.Item label={item.nombre} value={item.nombre} key={item.nombre}/>)
+                  <Picker.Item label={item.nombre} value={item.user} key={item.user}/>)
                )}            
             </Picker>
             <Text style = {styles.text}>{this.state.user}</Text>
