@@ -20,7 +20,9 @@ export default class SimpleElement extends Component {
                 isRemoval={false} 
                 idLlanta={this.props.llanta.id}
                 bodega={item.bodega}
+                bodega_id={item.bodega_id}
                 permisionario={item.permisionario}
+                permisionario_id={item.permisionario_id}
                 onAdd={this.props.onAdd} 
                 dot={this.props.llanta.dot}
                 marca={this.props.llanta.marca.nombre}

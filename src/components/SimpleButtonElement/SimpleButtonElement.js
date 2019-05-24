@@ -19,7 +19,9 @@ export default class SimpleButtonElement extends Component {
     //console.log('onclick .......');
     this.props.onAdd({idLlanta : this.props.idLlanta,
                      bodega: this.props.bodega, 
+                     bodega_id: this.props.bodega_id, 
                      permisionario: this.props.permisionario, 
+                     permisionario_id: this.props.permisionario_id, 
                      cantidad: 1,
                      dot: this.props.dot,
                      marca: this.props.marca,

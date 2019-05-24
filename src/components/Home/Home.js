@@ -37,6 +37,46 @@ export default class Home extends React.Component {
     return [false, i];
   }
 
+  sendDataMovimiento(vale, movimiento){
+
+      let datasend = {
+        "fecha_movimiento": MyBasics.diadehoy(),
+        "cantidad": movimiento.cantidad,//movimiento salida harcoded
+        "observacion": "test movimiento 1",
+        "vale": vale.id,
+        "tipo_movimiento": vale.tipo_movimiento,
+        "origen":movimiento.bodega_id,
+        "destino":this.state.economicoSelected,
+        "llanta":movimiento.idLlanta,
+        "creador":this.props.currentUser,
+        "permisionario": movimiento.permisionario_id
+      };
+    console.log('datasend......................');
+    console.log(datasend);
+
+    fetch(`${loginURI}/api/v0/movimiento/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.tokenUser}`,
+      },
+      body: JSON.stringify(datasend)//stringify
+
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+        console.log("movimiento respuesta exitosa .................INI");
+        console.log(responseJson);
+        console.log("movimiento respuesta exitosa .................FIN");
+    })
+    .catch((error) =>{
+      console.log("movimiento NO insertado con exito :( .................");
+      console.error(error);
+    });
+
+
+  }
+
   sendDataCallBack() {
     console.log("se envian todos los datos ....llantasSelected");
     console.log(this.state.llantasSelected);
@@ -60,6 +100,9 @@ export default class Home extends React.Component {
     .then((response) => response.json())
     .then((responseJson) => {
         console.log(responseJson);
+        vale = responseJson;
+        console.log("entra al for ...... movimientos......................");
+        this.state.llantasSelected.forEach( (llanta) => {this.sendDataMovimiento(vale, llanta)});
     })
     .catch((error) =>{
       console.error(error);
