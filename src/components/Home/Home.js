@@ -6,6 +6,7 @@ import LogoutButton from '../LogoutButton/LogoutButton';
 import PageButton from '../PageButton/PageButton';
 import SendButton from '../SendButton/SendButton';
 import {loginURI} from '../../util/Mylogin';
+import MyBasics from '../../util/MyBasics';
 
 export default class Home extends React.Component {
 
@@ -20,6 +21,10 @@ export default class Home extends React.Component {
     this.sendDataCallBack = this.sendDataCallBack.bind(this);
   } //constructor
 
+  //componentDidMount(){
+    //console.log('did mount ..... fecha de hoy');
+    //console.log(MyBasics.diadehoy());
+  //} // componentDidMount
 
   containsLlanta(obj, list) {
     // returns true/false y el index en que se encuentra en el array
@@ -44,23 +49,19 @@ export default class Home extends React.Component {
         'Authorization': `Token ${this.props.tokenUser}`,
       },
       body: JSON.stringify({
-        "no_folio": "25",
-        "observaciones_grales": "Desde la app yeah !!!",
-        "fecha_vale": "2019-05-23",
-        "tipo_movimiento": "2",//movimiento salida
-        "persona_asociada": "1",
-        "creador_vale": "1"
+        "observaciones_grales": "",
+        "fecha_vale": MyBasics.diadehoy(),
+        "tipo_movimiento": "2",//movimiento salida harcoded
+        "persona_asociada": this.props.currentUser,
+        "creador_vale": this.props.currentUser
       })//stringify
 
     })
     .then((response) => response.json())
     .then((responseJson) => {
-        console.log("Respuesta del Endpoint .....")
-        console.log('responseJson...............');
         console.log(responseJson);
     })
     .catch((error) =>{
-      console.error("ERROR ....");
       console.error(error);
     });
 
@@ -98,7 +99,7 @@ export default class Home extends React.Component {
     if (this.state.pageStep === 1) {
       return (
         <View style={styles.container}>
-          <Text style={styles.titleText}> Paso 1 |{this.state.pageStep}|[{this.props.currentUsername}]</Text> 
+          <Text style={styles.titleText}> Busca la llanta [usuario: {this.props.currentUsername}, {this.props.currentUser}]</Text> 
             <LlantasList tokenUser={this.props.tokenUser} onAdd={this.addLlanta} ></LlantasList>
             <PageButton paginaSig={2} changePageHome={this.changePageCallBack}></PageButton>
             <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
@@ -107,7 +108,7 @@ export default class Home extends React.Component {
     } else if (this.state.pageStep === 2) { //if
       return (
           <View style={styles.container}>
-            <Text style={styles.titleText}> Paso 2 |{this.state.pageStep}|{this.props.currentUsername}</Text>
+            <Text style={styles.titleText}> Paso {this.state.pageStep}|{this.props.currentUsername}</Text>
               <LlantasListSelected tokenUser={this.props.tokenUser} llantasSelected={this.state.llantasSelected} economicoSelected={this.economicoSelectedCallBack}></LlantasListSelected>
 
               <SendButton sendData={this.sendDataCallBack} />
