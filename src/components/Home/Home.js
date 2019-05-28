@@ -46,7 +46,7 @@ export default class Home extends React.Component {
         "vale": vale.id,
         "tipo_movimiento": vale.tipo_movimiento,
         "origen":movimiento.bodega_id,
-        "destino":this.state.economicoSelected,
+        "destino":this.state.economicoSelected.user,
         "llanta":movimiento.idLlanta,
         "creador":this.props.currentUser,
         "permisionario": movimiento.permisionario_id
@@ -81,7 +81,7 @@ export default class Home extends React.Component {
     console.log("se envian todos los datos ....llantasSelected");
     console.log(this.state.llantasSelected);
     console.log("se envian todos los datos ....economicoSelected");
-    console.log(this.state.economicoSelected);
+    console.log(this.state.economicoSelected.user);
     fetch(`${loginURI}/api/v0/vale/`, {
       method: 'POST',
       headers: {
@@ -130,10 +130,8 @@ export default class Home extends React.Component {
   }
 
   economicoSelectedCallBack = (user) => {
-    console.log("... selected from parent ...");
-    console.log(user);
     this.setState({
-      economicoSelected: user
+      economicoSelected: {"user": user}
     })
 
   }
@@ -154,7 +152,7 @@ export default class Home extends React.Component {
             <Text style={styles.titleText}> Paso {this.state.pageStep}|{this.props.currentUsername}</Text>
               <LlantasListSelected tokenUser={this.props.tokenUser} llantasSelected={this.state.llantasSelected} economicoSelected={this.economicoSelectedCallBack}></LlantasListSelected>
 
-              <SendButton sendData={this.sendDataCallBack} />
+              <SendButton sendData={this.sendDataCallBack} validateEconomico={this.state.economicoSelected} />
               <PageButton paginaSig={1} changePageHome={this.changePageCallBack}></PageButton>
               <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
           </View>
