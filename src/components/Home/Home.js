@@ -140,7 +140,7 @@ export default class Home extends React.Component {
     if (this.state.pageStep === 1) {
       return (
         <View style={styles.container}>
-          <Text style={styles.titleText}> Busca la llanta [usuario: {this.props.currentUsername}, {this.props.currentUser}]</Text> 
+          <Text style={styles.titleText}> Busca la llanta {this.props.currentUsername}</Text> 
             <LlantasList tokenUser={this.props.tokenUser} onAdd={this.addLlanta} ></LlantasList>
             <PageButton paginaSig={2} changePageHome={this.changePageCallBack}></PageButton>
             <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>

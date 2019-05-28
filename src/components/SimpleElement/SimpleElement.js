@@ -7,7 +7,7 @@ export default class SimpleElement extends Component {
   render() {
     return (
       <View>
-      	<Text>{this.props.llanta.dot} {this.props.llanta.marca.nombre} {this.props.llanta.medida.nombre} {this.props.llanta.posicion.nombre} {this.props.llanta.status.nombre}</Text>
+      	<Text style={styles.itemllanta}>{this.props.llanta.dot} {this.props.llanta.marca.nombre} {this.props.llanta.medida.nombre} {this.props.llanta.posicion.nombre} {this.props.llanta.status.nombre}</Text>
       	<FlatList
           data={this.props.llanta.detalle}
           keyExtractor={(item, index) => item.id+this.props.llanta.id+index}
@@ -41,9 +41,14 @@ const styles = StyleSheet.create({
    flex: 1,
    paddingTop: 22
   },
+  itemllanta: {
+    padding: 8,
+    fontSize: 15,
+    height: 44,
+  },
   item: {
-    padding: 10,
-    fontSize: 18,
+    padding: 8,
+    fontSize: 10,
     height: 44,
   },
 })

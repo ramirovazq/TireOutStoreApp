@@ -25,7 +25,7 @@ export default class PageButton extends React.Component {
 const styles = StyleSheet.create({
     button: {
     alignItems: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: 'powderblue',
     width: 200,
     height: 44,
     padding: 10,
