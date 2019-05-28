@@ -21,11 +21,6 @@ export default class Home extends React.Component {
     this.sendDataCallBack = this.sendDataCallBack.bind(this);
   } //constructor
 
-  //componentDidMount(){
-    //console.log('did mount ..... fecha de hoy');
-    //console.log(MyBasics.diadehoy());
-  //} // componentDidMount
-
   containsLlanta(obj, list) {
     // returns true/false y el index en que se encuentra en el array
     let i;
@@ -38,7 +33,6 @@ export default class Home extends React.Component {
   }
 
   sendDataMovimiento(vale, movimiento){
-
       let datasend = {
         "fecha_movimiento": MyBasics.diadehoy(),
         "cantidad": movimiento.cantidad,//movimiento salida harcoded
@@ -51,37 +45,10 @@ export default class Home extends React.Component {
         "creador":this.props.currentUser,
         "permisionario": movimiento.permisionario_id
       };
-    console.log('datasend......................');
-    console.log(datasend);
-
-    fetch(`${loginURI}/api/v0/movimiento/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.tokenUser}`,
-      },
-      body: JSON.stringify(datasend)//stringify
-
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-        console.log("movimiento respuesta exitosa .................INI");
-        console.log(responseJson);
-        console.log("movimiento respuesta exitosa .................FIN");
-    })
-    .catch((error) =>{
-      console.log("movimiento NO insertado con exito :( .................");
-      console.error(error);
-    });
-
-
-  }
+    MyBasics.generaMovimiento(this.props, datasend);
+  } // sendDataMovimiento
 
   sendDataCallBack() {
-    console.log("se envian todos los datos ....llantasSelected");
-    console.log(this.state.llantasSelected);
-    console.log("se envian todos los datos ....economicoSelected");
-    console.log(this.state.economicoSelected.user);
     fetch(`${loginURI}/api/v0/vale/`, {
       method: 'POST',
       headers: {
@@ -95,7 +62,6 @@ export default class Home extends React.Component {
         "persona_asociada": this.props.currentUser,
         "creador_vale": this.props.currentUser
       })//stringify
-
     })
     .then((response) => response.json())
     .then((responseJson) => {
@@ -107,9 +73,7 @@ export default class Home extends React.Component {
     .catch((error) =>{
       console.error(error);
     });
-
-
-  }
+  }//sendDataCallBack
 
   addLlanta(llanta) {
     let llantas = this.state.llantasSelected;
@@ -120,14 +84,13 @@ export default class Home extends React.Component {
       llantas[alreadyExist[1]].cantidad = llantas[alreadyExist[1]].cantidad + 1
     } // else
     this.setState({llantasSelected: llantas});
-    // console.log(llantas);
-  }
+  }//addLlanta
 
   changePageCallBack = (numPag) => {
     this.setState({
       pageStep: numPag
-    })
-  }
+    }) 
+  } //changePageCallback
 
   economicoSelectedCallBack = (user) => {
     this.setState({
