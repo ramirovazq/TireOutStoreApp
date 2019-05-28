@@ -12,11 +12,16 @@ export default class SendButton extends React.Component {
   }
 
   validateSelectedEconomico() {
-    if (Object.keys(this.props.validateEconomico).length) {
-      return true;
-    } else {
+    if (typeof this.props.validateLlantas !== 'undefined' && this.props.validateLlantas.length > 0) {
+       if (Object.keys(this.props.validateEconomico).length ) {
+         return true;
+       } else {
+         return false;
+       }
+     } else {
       return false;
-    }
+     }
+      
   }
 
 

@@ -152,7 +152,7 @@ export default class Home extends React.Component {
             <Text style={styles.titleText}> Paso {this.state.pageStep}|{this.props.currentUsername}</Text>
               <LlantasListSelected tokenUser={this.props.tokenUser} llantasSelected={this.state.llantasSelected} economicoSelected={this.economicoSelectedCallBack}></LlantasListSelected>
 
-              <SendButton sendData={this.sendDataCallBack} validateEconomico={this.state.economicoSelected} />
+              <SendButton sendData={this.sendDataCallBack} validateEconomico={this.state.economicoSelected}  validateLlantas={this.state.llantasSelected}/>
               <PageButton paginaSig={1} changePageHome={this.changePageCallBack}></PageButton>
               <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
           </View>
