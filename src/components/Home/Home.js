@@ -45,34 +45,31 @@ export default class Home extends React.Component {
         "creador":this.props.currentUser,
         "permisionario": movimiento.permisionario_id
       };
-    MyBasics.generaMovimiento(this.props, datasend);
+    MyBasics.generaMovimiento(this.props, datasend)
+      .then((respuesta) => { 
+        console.log("respuesta movimiento....");
+        if (!('error' in respuesta)) {
+          console.log('todo bien');
+        } else {
+         // Debe mostrar error al generar movimiento  ....
+          console.log(respuesta.error)
+        }
+      });
   } // sendDataMovimiento
 
   sendDataCallBack() {
-    fetch(`${loginURI}/api/v0/vale/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${this.props.tokenUser}`,
-      },
-      body: JSON.stringify({
-        "observaciones_grales": "",
-        "fecha_vale": MyBasics.diadehoy(),
-        "tipo_movimiento": "2",//movimiento salida harcoded
-        "persona_asociada": this.props.currentUser,
-        "creador_vale": this.props.currentUser
-      })//stringify
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-        console.log(responseJson);
-        vale = responseJson;
-        console.log("entra al for ...... movimientos......................");
-        this.state.llantasSelected.forEach( (llanta) => {this.sendDataMovimiento(vale, llanta)});
-    })
-    .catch((error) =>{
-      console.error(error);
-    });
+    MyBasics.generaVale(this.props)
+      .then((respuesta) => { 
+        console.log("respuesta vale ....");
+        if (!('error' in respuesta)) {
+          let vale = respuesta;
+          this.state.llantasSelected.forEach( (llanta) => {this.sendDataMovimiento(vale, llanta)});
+        } else {
+          // Debe mostrar error al generar vale  .... y no continuar
+          console.log(respuesta.error)
+        }
+      });
+
   }//sendDataCallBack
 
   addLlanta(llanta) {

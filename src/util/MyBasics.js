@@ -20,18 +20,52 @@ const MyBasics = {
 		        'Authorization': `Token ${losprops.tokenUser}`,
 		      },
 		      body: JSON.stringify(datasend)//stringify
-
 		    })
-		    .then((response) => response.json())
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error("Falla, respuesta HTTP Codigo " + response.status);
+	            }
+	            return response;
+	        })
+		    .then((result) => result.json())
 		    .then((responseJson) => {
-		        console.log("Respuesta: generar movimiento ......................");
-		        console.log(responseJson);
+		        return responseJson;
 		    })
 		    .catch((error) =>{
-		      console.log("movimiento NO insertado con exito :( .................");
-		      console.error(error);
-		    });
+				return {"error": "Error en la peticion de movimiento :("};
+		     });
 	}, //generaMovimiento
+
+	generaVale(losprops) {
+	   	  return fetch(`${loginURI}/api/v0/vale/`, {
+		      method: 'POST',
+		      headers: {
+		        'Content-Type': 'application/json',
+		        'Authorization': `Token ${losprops.tokenUser}`,
+		      },
+		      body: JSON.stringify({
+		        "observaciones_grales": "",
+		        "fecha_vale": MyBasics.diadehoy(),
+		        "tipo_movimiento": "2",//movimiento salida harcoded
+		        "persona_asociada": losprops.currentUser,
+		        "creador_vale": losprops.currentUser
+		      })//stringify
+		    })
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error("Falla, respuesta HTTP Codigo " + response.status);
+	            }
+	            return response;
+	        })
+		    .then((result) => result.json())
+		    .then((responseJson) => {
+		    		return responseJson;
+		    })
+		    .catch((error) =>{
+		      return {"error": "Error en la peticion de vale :("};
+		    });
+	}, //generaVale
+
 };
 
 export default MyBasics;
