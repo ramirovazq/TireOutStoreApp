@@ -23,8 +23,6 @@ export default class LlantasList extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        // console.log('responseJson...............');
-        // console.log(responseJson);
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -39,6 +37,9 @@ export default class LlantasList extends Component {
   } // componentDidMount
 
   componentWillUnmount(){
+        this.setState({
+          dataSource: {}
+        });
   }
 
   render() {

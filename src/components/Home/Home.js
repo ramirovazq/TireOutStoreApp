@@ -49,16 +49,13 @@ export default class Home extends React.Component {
       };
     MyBasics.generaMovimiento(this.props, datasend)
       .then((respuesta) => { 
-        console.log("respuesta movimiento....");
-        console.log(respuesta);
         let msgMovs = this.state.msgMovimientos;
         if (!('error' in respuesta)) {
-          msgMovs = msgMovs + " movimiento agregado \n"
+          msgMovs = msgMovs + ` movimiento # ${respuesta.id} agregado \n`
           this.setState({msgMovimientos: msgMovs});
         } else {
-          msgMovs = msgMovs + " error movimiento  \n"
+          msgMovs = msgMovs + ` error movimiento  \n` 
           this.setState({msgMovimientos: msgMovs});
-          console.log(respuesta.error);
         }
       });
   } // sendDataMovimiento
@@ -66,19 +63,16 @@ export default class Home extends React.Component {
   sendDataCallBack() {
     MyBasics.generaVale(this.props)
       .then((respuesta) => { 
-        console.log("respuesta vale ....");
-        console.log(respuesta);
         if (!('error' in respuesta)) {
           this.setState({
-            msgVale: "Vale agregado con éxito"
+            msgVale: `Vale # ${respuesta.no_folio} agregado con éxito`
           })           
           let vale = respuesta;          
           this.state.llantasSelected.forEach( (llanta) => {this.sendDataMovimiento(vale, llanta)});
         } else {
           this.setState({
-              msgVale: "No se agregó el Vale"
+              msgVale: ` No se agregó el Vale` 
           })           
-          console.log(respuesta.error)
         }
         this.changePageCallBack(3);
       });
@@ -97,6 +91,16 @@ export default class Home extends React.Component {
   }//addLlanta
 
   changePageCallBack = (numPag) => {
+
+    if (numPag === 1) {
+    console.log("ping 1 .....................");
+    this.setState({
+      llantasSelected: [],
+      economicoSelected: {},
+      msgVale: "",
+      msgMovimientos: ""
+      }) 
+    }
     this.setState({
       pageStep: numPag
     }) 
@@ -153,6 +157,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'yellow',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  TitleText:{
+    fontSize: 30,
     alignItems: 'center',
     justifyContent: 'center',
   },

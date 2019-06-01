@@ -16,6 +16,9 @@ export default class LlantasListSelected extends Component {
   } // componentDidMount
 
   componentWillUnmount(){
+    this.setState({
+      economicSource: {}
+    });
   }
 
   render() {
