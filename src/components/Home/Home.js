@@ -15,7 +15,9 @@ export default class Home extends React.Component {
     this.state = {
       pageStep: 1,
       llantasSelected: [],
-      economicoSelected: {}
+      economicoSelected: {},
+      msgVale: "",
+      msgMovimientos: ""
     };
     this.addLlanta = this.addLlanta.bind(this);
     this.sendDataCallBack = this.sendDataCallBack.bind(this);
@@ -48,11 +50,15 @@ export default class Home extends React.Component {
     MyBasics.generaMovimiento(this.props, datasend)
       .then((respuesta) => { 
         console.log("respuesta movimiento....");
+        console.log(respuesta);
+        let msgMovs = this.state.msgMovimientos;
         if (!('error' in respuesta)) {
-          console.log('todo bien');
+          msgMovs = msgMovs + " movimiento agregado \n"
+          this.setState({msgMovimientos: msgMovs});
         } else {
-         // Debe mostrar error al generar movimiento  ....
-          console.log(respuesta.error)
+          msgMovs = msgMovs + " error movimiento  \n"
+          this.setState({msgMovimientos: msgMovs});
+          console.log(respuesta.error);
         }
       });
   } // sendDataMovimiento
@@ -61,13 +67,20 @@ export default class Home extends React.Component {
     MyBasics.generaVale(this.props)
       .then((respuesta) => { 
         console.log("respuesta vale ....");
+        console.log(respuesta);
         if (!('error' in respuesta)) {
-          let vale = respuesta;
+          this.setState({
+            msgVale: "Vale agregado con éxito"
+          })           
+          let vale = respuesta;          
           this.state.llantasSelected.forEach( (llanta) => {this.sendDataMovimiento(vale, llanta)});
         } else {
-          // Debe mostrar error al generar vale  .... y no continuar
+          this.setState({
+              msgVale: "No se agregó el Vale"
+          })           
           console.log(respuesta.error)
         }
+        this.changePageCallBack(3);
       });
 
   }//sendDataCallBack
@@ -117,6 +130,20 @@ export default class Home extends React.Component {
               <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
           </View>
       ); 
+    } else if (this.state.pageStep === 3) { //if
+      return (
+          <View style={styles.container}>
+              <Text style={styles.titleText}> Paso 3</Text>
+              <Text style={styles.simpleText}>
+                {this.state.msgVale} 
+              </Text>
+              <Text style={styles.simpleText}>
+                {this.state.msgMovimientos} 
+              </Text>
+              <PageButton paginaSig={1} changePageHome={this.changePageCallBack}></PageButton>
+              <LogoutButton asignUserVacio={this.props.asignUser} ></LogoutButton>
+          </View>
+      ); 
     }
   } //render
 
@@ -129,8 +156,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  titleText:{
-    fontSize: 30,
+  simpleText:{
+    fontSize: 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
