@@ -12,6 +12,29 @@ const MyBasics = {
 	    return yyyymmdd;
 	},//simplelogin
 
+	dameLlantas(losprops) {
+	      return fetch(`${loginURI}/api/v0/llanta/`, {
+		      method: 'GET',
+		      headers: {
+		        'Content-Type': 'application/json',
+		        'Authorization': `Token ${losprops.tokenUser}`,
+		      }
+		    })
+	        .then(response => {
+	            if (!response.ok) {
+	                throw new Error("Falla, respuesta HTTP Codigo " + response.status);
+	            }
+	            return response;
+	        })
+		    .then((result) => result.json())
+		    .then((responseJson) => {
+		        return responseJson;
+		    })
+		    .catch((error) =>{
+				return {"error": "Error en la petición de llantas"};
+		     });
+	}, //generaMovimiento
+
 	generaMovimiento(losprops, datasend) {
 	      return fetch(`${loginURI}/api/v0/movimiento/`, {
 		      method: 'POST',

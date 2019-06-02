@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, ActivityIndicator, StyleSheet, View } from 'react-native';
 import ElementList from '../ElementList/ElementList';
-import {loginURI} from '../../util/Mylogin';
+import MyBasics from '../../util/MyBasics';
 
 export default class LlantasList extends Component {
 
@@ -9,38 +9,26 @@ export default class LlantasList extends Component {
     super(props);
     this.state = { 
       isLoading: true,
-      dataSource: {}
+      dataSource: {},
+      stringSearch: ""
     }
   }
 
   componentDidMount(){    
-    fetch(`${loginURI}/api/v0/llanta/`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Authorization': `Token ${this.props.tokenUser}`,
-      }
-    })
-      .then((response) => response.json())
+    MyBasics.dameLlantas(this.props)
       .then((responseJson) => {
         this.setState({
           isLoading: false,
-          dataSource: responseJson,
-        }, function(){
-
+          dataSource: responseJson, 
         });
-
       })
-      .catch((error) =>{
-        console.error(error);
-      });
   } // componentDidMount
 
   componentWillUnmount(){
-        this.setState({
-          dataSource: {}
-        });
-  }
+    this.setState({
+      dataSource: {}
+    });
+  } // componentWillIUMount
 
   render() {
 
@@ -71,4 +59,4 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-})
+});
