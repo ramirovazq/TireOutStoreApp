@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, ActivityIndicator, StyleSheet, Text, TextInput, View } from 'react-native';
 import ElementList from '../ElementList/ElementList';
 import MyBasics from '../../util/MyBasics';
 
@@ -10,8 +10,8 @@ export default class LlantasList extends Component {
     this.state = { 
       isLoading: true,
       dataSource: {},
-      stringSearch: ""
-    }
+      textSearch: ''
+    };
   }
 
   componentDidMount(){    
@@ -38,7 +38,7 @@ export default class LlantasList extends Component {
           <ActivityIndicator/>
         </View>
       )
-    } else if (this.state.stringSearch == "hola") {
+    } else if (this.state.textSearch == "hola") {
       return (
         <View style={styles.container}>
           <ScrollView>
@@ -50,6 +50,11 @@ export default class LlantasList extends Component {
       return (
         <View style={styles.container}>
           <Text> inventario cargado ...</Text>
+          <TextInput
+            style={{height: 40}}
+            placeholder="Busca el dot"
+            onChangeText={(text) => this.setState({textSearch: text})}
+          />
         </View>
       );
     } // else 
