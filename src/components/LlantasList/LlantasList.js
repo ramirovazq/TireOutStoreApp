@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, ActivityIndicator, StyleSheet, View } from 'react-native';
+import { ScrollView, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import ElementList from '../ElementList/ElementList';
 import MyBasics from '../../util/MyBasics';
 
@@ -38,14 +38,21 @@ export default class LlantasList extends Component {
           <ActivityIndicator/>
         </View>
       )
-    }
-    return (
-      <View style={styles.container}>
-        <ScrollView>
-          <ElementList llantas={this.state.dataSource} onAdd={this.props.onAdd} />
-        </ScrollView>
-      </View>
-    );
+    } else if (this.state.stringSearch == "hola") {
+      return (
+        <View style={styles.container}>
+          <ScrollView>
+            <ElementList llantas={this.state.dataSource} onAdd={this.props.onAdd} />
+          </ScrollView>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text> inventario cargado ...</Text>
+        </View>
+      );
+    } // else 
   }
 }
 
