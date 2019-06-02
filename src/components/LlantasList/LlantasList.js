@@ -38,7 +38,7 @@ export default class LlantasList extends Component {
           <ActivityIndicator/>
         </View>
       )
-    } else if (this.state.textSearch == "hola") {
+    } else if (this.state.textSearch.lenght  >= 3) {
       return (
         <View style={styles.container}>
           <ScrollView>
