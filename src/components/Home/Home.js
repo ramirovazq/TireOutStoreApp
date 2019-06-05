@@ -93,7 +93,6 @@ export default class Home extends React.Component {
   changePageCallBack = (numPag) => {
 
     if (numPag === 1) {
-    console.log("ping 1 .....................");
     this.setState({
       llantasSelected: [],
       economicoSelected: {},

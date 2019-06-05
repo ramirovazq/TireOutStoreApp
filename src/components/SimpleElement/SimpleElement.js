@@ -13,7 +13,7 @@ export default class SimpleElement extends Component {
           keyExtractor={(item, index) => item.id+this.props.llanta.id+index}
           renderItem={({item}) => (
             <View>
-              <Text style={styles.item}>{item.bodega} {item.permisionario} [{item.cantidad}]</Text>
+              <Text style={styles.item}>{item.bodega} {item.permisionario} [cantidad {item.cantidad}]</Text>
               <SimpleButtonElement 
                 maxNumber={item.cantidad} 
                 minNumber={0} 
@@ -27,10 +27,11 @@ export default class SimpleElement extends Component {
                 dot={this.props.llanta.dot}
                 marca={this.props.llanta.marca.nombre}
                 medida={this.props.llanta.medida.nombre}
-              /> 
+              />               
             </View>
             )}
         />
+        <Text style={styles.itemvacio}></Text>
       </View>
     );
   }
@@ -42,13 +43,17 @@ const styles = StyleSheet.create({
    paddingTop: 22
   },
   itemllanta: {
+    fontWeight: "bold",
     padding: 8,
     fontSize: 15,
     height: 44,
   },
   item: {
     padding: 8,
-    fontSize: 10,
+    fontSize: 12,
     height: 44,
+  },
+  itemvacio: {
+    paddingTop: 12
   },
 })
