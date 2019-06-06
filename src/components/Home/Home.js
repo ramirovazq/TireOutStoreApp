@@ -38,7 +38,7 @@ export default class Home extends React.Component {
       let datasend = {
         "fecha_movimiento": MyBasics.diadehoy(),
         "cantidad": movimiento.cantidad,//movimiento salida harcoded
-        "observacion": "test movimiento 1",
+        "observacion": ".",
         "vale": vale.id,
         "tipo_movimiento": vale.tipo_movimiento,
         "origen":movimiento.bodega_id,
